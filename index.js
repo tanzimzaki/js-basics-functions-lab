@@ -1,56 +1,34 @@
-console.log("Scuber - The transportation company");
+// Code your solution in this file!
 
-function distanceFromHqInBlocks (location) {
-  return Math.abs(48-location); 
-}
-
-function distanceFromHqInFeet (location) {      
-  return distanceFromHqInBlocks(location)*264;  
-}
-
-function distanceTravelledInFeet (start, stop) {
-  return Math.abs(start-stop)*264;
-}
-
-function calculatesFarePrice (start, stop) {
-  let travelled = distanceTravelledInFeet(start, stop)
-  
-    if (travelled<400) {
-    
-      return 0;
-      
-  } else if (travelled>400 && travelled<=2000) {
-      
-      return (travelled-400)*0.02;
-  
-  } 
-  else if (travelled>2000 && travelled<=2500) {
-  
-      return 40; 
-  
-  } 
-  else {
-  
-      return "Cannot travel that far";
-    
+function distanceFromHqInBlocks(streetBlock) {
+  if (streetBlock >= 42) {
+    return streetBlock - 42;
+  } else {
+    return 42 - streetBlock;
   }
 }
 
-console.log(distanceFromHqInBlocks(50));
-console.log(distanceFromHqInFeet(50));
-console.log("$" + calculatesFarePrice(60, 62));
+function distanceFromHqInFeet(streetBlock) {
+  return distanceFromHqInBlocks(streetBlock) * 264;
+}
 
+function distanceTravelledInFeet(pickUpBlock, destinationBlock) {
+  if (pickUpBlock > destinationBlock) {
+    return (pickUpBlock - destinationBlock) * 264;
+  } else {
+    return (destinationBlock - pickUpBlock) * 264;
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+function calculatesFarePrice(start, destination) {
+  const distance = distanceTravelledInFeet(start, destination);
+  if (distance <= 400) {
+    return 0;
+  } else if (distance <= 2000) {
+    return (distance - 400) * 0.02;
+  } else if (distance <= 2500) {
+    return 25;
+  } else {
+    return "cannot travel that far";
+  }
+}
